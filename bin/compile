@@ -24,4 +24,5 @@ if [ -z "$DEPLOY_TASKS" ]; then
   exit 0
 fi
 
+echo "Running: cd $build_dir && bundle exec $DEPLOY_TASKS"
 cd $build_dir && bundle exec $DEPLOY_TASKS
