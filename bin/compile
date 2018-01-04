@@ -17,12 +17,21 @@ if [ -d "$env_dir" ]; then
   done
 fi
 
-if [ -z "$DEPLOY_TASKS" ]; then
-  echo "DEPLOY_TASKS has not been set"
-  echo "You can set it with:"
-  echo 'heroku config:set DEPLOY_TASKS="rake tasks to run"'
-  exit 0
-fi
+for i in {0..100}
+do
+  task_name=DEPLOY_TASK_$i
+  cmd=${!task_name}
 
-echo "Running: cd $build_dir && bundle exec $DEPLOY_TASKS"
-cd $build_dir && bundle exec $DEPLOY_TASKS
+  if [ -z "$cmd" ]; then
+    if [ $i -eq 0 ]; then
+      echo "DEPLOY_TASK_0 has not been set"
+      echo "You can set it with:"
+      echo 'heroku config:set DEPLOY_TASK_0="rake tasks to run"'
+    fi
+    exit 0
+  fi
+
+  echo "Running: cd $build_dir && bundle exec $cmd"
+  cd $build_dir && bundle exec $cmd
+done
+
