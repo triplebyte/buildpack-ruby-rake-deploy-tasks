@@ -31,7 +31,8 @@ do
     exit 0
   fi
 
-  echo "$i) Running: cd $build_dir && $cmd"
-  cd $build_dir && $cmd
+  full_cmd="cd $build_dir && $cmd"
+  echo "DEPLOY_TASK_$i) Running: $full_cmd"
+  eval $full_cmd
 done
 
