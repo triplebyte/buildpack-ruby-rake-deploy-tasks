@@ -31,7 +31,7 @@ do
     exit 0
   fi
 
-  echo "Running: cd $build_dir && bundle exec $cmd"
+  echo "$i) Running: cd $build_dir && bundle exec $cmd"
   cd $build_dir && bundle exec $cmd
 done
 
