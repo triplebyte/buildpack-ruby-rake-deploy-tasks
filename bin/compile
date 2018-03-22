@@ -19,24 +19,24 @@ fi
 
 for i in {0..100}
 do
-  task_name=DEPLOY_TASK_$i
+  task_name=BEFORE_BUILD_TASK_$i
   cmd=${!task_name}
 
   if [ -z "$cmd" ]; then
     if [ $i -eq 0 ]; then
-      echo "DEPLOY_TASK_0 has not been set"
+      echo "BEFORE_BUILD_TASK_0 has not been set"
       echo "You can set it with:"
-      echo 'heroku config:set DEPLOY_TASK_0="rake tasks to run"'
+      echo 'heroku config:set BEFORE_BUILD_TASK_0="rake tasks to run"'
     fi
     exit 0
   fi
 
   full_cmd="cd $build_dir && $cmd"
-  echo "DEPLOY_TASK_$i) Running: $full_cmd"
+  echo "BEFORE_BUILD_TASK_$i) Running: $full_cmd"
   eval $full_cmd
 
   if [ $? -ne 0 ]; then
-    echo "DEPLOY_TASK_$i failed to run properly, exit value was: $?"
+    echo "BEFORE_BUILD_TASK_$i failed to run properly, exit value was: $?"
     exit $?
   fi
 done
