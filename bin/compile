@@ -8,6 +8,10 @@ build_dir=$1
 cache_dir=$2
 env_dir=$3
 
+export BUILD_DIR=$1
+export CACHE_DIR=$2
+export ENV_DIR=$3
+
 blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
 if [ -d "$env_dir" ]; then
   for e in $(ls $env_dir); do
